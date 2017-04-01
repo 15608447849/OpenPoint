@@ -6,10 +6,17 @@ android {
 
     defaultConfig {
         applicationId "yw.lzp.com.openpoint"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+//        //ndk编译生成.so文件
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        ndk {
+//            moduleName "Screen"         //生成的so名字
+//            ldLibs "log"
+//            abiFilters "armeabi", "armeabi-v7a", "x86"  //输出指定三种abi体系结构下的so库。
+//        }
     }
     buildTypes {
         release {

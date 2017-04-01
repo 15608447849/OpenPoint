@@ -10,20 +10,59 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="yw.lzp.com.openpoint.MainActivity">
 
-
-
-        <TextView
-            android:id="@+id/ip"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="127.0.0.1"
-            />
-    <TextView
-        android:id="@+id/mac"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:background="@android:color/holo_blue_dark"
+            android:padding="15dp">
+            <TextView
+                android:id="@+id/ip"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="ip:127.0.0.1"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/mac"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="mac:00-00-00-00-00"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="35sp"
+                android:textColor="@android:color/holo_orange_dark"
+                android:text="00:00:00"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="00-00-00-00"
-        />
+        android:layout_height="220dp"
+        android:background="@android:color/holo_red_dark"
+        android:layout_margin="10dp">
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_orange_light"
+            android:text="log:"
+            />
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +71,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="端口号 : "
+            android:text="请输入: "
             />
         <EditText
             android:id="@+id/edit_point"
@@ -41,22 +80,60 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:singleLine="true"
-            android:inputType="number"/>
+            android:text="time b "
+            android:background="@android:color/darker_gray"
+            />
     </LinearLayout>
-
-
-    <Button
-        android:text="打开端口"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="openPoint"
-        />
-
-        <TextView
-            android:id="@+id/info"
-            android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="15dp">
+        <Button
+            android:text="打开端口"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="openPoint"
             />
-
-
+        <Button
+            android:text="截屏"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="screenCap"
+            />
+        <Button
+            android:text="设置定时开关机"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="settingTimeTel"
+            />
+        <Button
+            android:text="进入webView测试页面"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="gotoWebView"
+            />
+    </LinearLayout>
+    <ScrollView
+        android:id="@+id/image_layer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@android:color/black"
+        android:layout_marginTop="10dp">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/show_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/close"
+                android:onClick="closeImage"
+                />
+        </FrameLayout>
+    </ScrollView>
 </LinearLayout>
