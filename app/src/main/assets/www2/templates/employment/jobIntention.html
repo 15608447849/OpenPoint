@@ -1,0 +1,17 @@
+<ion-nav-view name="jobIntention">
+   <ion-header-bar class="bar-calm">
+      <a href="#/myResume" class="button button-clear icon ion-ios-arrow-back"></a>
+      <h1 style="text-align:center" class="title">求职意向</h1><a ng-click="save()" class="button button-clear">保存</a>
+   </ion-header-bar>
+   <ion-content style="padding:0 20px;">
+      <a style="padding:12px;border-left:none;border-right:none;" ui-sref="postSelect({type:1})" class="item row">
+         <span class="col-50">期望岗位</span>
+         <span class="col-50 qy-text-right">{{jobReturn($root.resumeDetails.position)||jobReturn($root.resumeDetails.inposit)}}<i style="margin-left:12px;" class="icon ion-chevron-right"></i>
+         </span>
+      </a>
+      <label style="border-left:none;border-right:none;" class="item item-input">
+         <span class="input-label">期望薪资</span>
+         <input type="text" style="text-align:right;" placeholder="请输入期望薪资" ng-model="$root.resumeDetails.salary" />
+      </label>
+   </ion-content>
+</ion-nav-view>

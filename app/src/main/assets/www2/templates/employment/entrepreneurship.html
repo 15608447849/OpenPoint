@@ -1,0 +1,31 @@
+<ion-nav-view name="entrepreneurship">
+   <ion-header-bar class="bar-calm">
+      <a href="#/tab/recruitMessing" class="button button-clear icon ion-ios-arrow-back"></a><a style="line-height:42px;text-align:center" ng-click="modal.show()" class="title button button-clear">创业信息<i class="icon ion-ios-arrow-down"></i></a>
+      <a class="button button-clear icon ion-search"></a>
+   </ion-header-bar>
+   <ion-content style="padding:0 8px;">
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+      <div style="background:#fff;padding-left:0px;padding-right:0px;top:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;box-shadow:none;border-left:none;border-right:none" ng-init="isActive=true" class="item item-divider tabs tabs-striped tabs-top tabs-color-balanced card row"><a ng-class="{true:'active'}[isActive]" ng-click="isActive=true;getData()" class="tab-item col-50">项目</a><a ng-class="{false:'active'}[isActive]" ng-click="isActive=false;seeMessage()" class="tab-item col-50">我的申请</a>
+      </div>
+      <ul ng-show="isActive==true" style="border-left:none;border-right:none;border-bottom:none;" class="item item-text-wrap list">
+         <li ng-repeat="item in jobProject" ui-sref="entrepreneurshipDetails({id:item.ttlid})" style="border-bottom:1px solid #ddd;">
+            <img ng-src="{{item.src}}" />
+            <h2 style="white-space:normal">{{item.proname}}</h2>
+            <p>{{item.proowner.toNumber()||item.proownerName}}</p>
+            <p>{{item.reldate}}</p>
+         </li>
+      </ul>
+      <ul ng-show="isActive==false" style="border-left:none;border-right:none;border-bottom:none;" class="item item-text-wrap list">
+         <li ng-repeat="item in news" ui-sref="entrepreneurshipDetails({id:item.ttlid})" style="border-bottom:1px solid #ddd;">
+            <img ng-src="{{item.src}}" />
+            <h2 style="white-space:normal">{{item.ttltitle}}111111111111111111</h2>
+            <p style="margin-top:16px;">{{item.reldate}}</p>
+         </li>
+      </ul>
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+      <!--.lista.item.item-thumbnail-left(ng-repeat="item in news",href="#/newsList/{{item.ttlid}}")
+    img(ng-src="{{item.src}}")
+    h2(style="white-space:normal") {{item.ttltitle}}
+    p(style="margin-top:16px;") {{item.reldate}}-->
+   </ion-content>
+</ion-nav-view>

@@ -1,0 +1,52 @@
+<!--Created by Administrator on 2017/3/7.
+-->
+<ion-nav-view>
+   <ion-content>
+      <div style="background:#11c1f3;height:240px;">
+         <div class="row">
+            <a href="#/tab/expert" style="color:#FFF;position:absolute;top:0;left:0;" class="button button-clear icon ion-ios-arrow-back"></a>
+            <div class="col text-right light">
+               <span class="icon ion-ios-heart-outline"></span>
+               <span>{{expert.ppn}}</span>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col col-center text-center">
+               <img ng-src="{{expert.hpurl}}" class="round-img" />
+               <p class="light">{{expert.username}}</p>
+               <p class="light">{{expert.eaname}}</p>
+               <p class="light">已完成{{expert.aetimes}}次咨询 | 活跃等级：{{expert.actlevel}}</p>
+            </div>
+         </div>
+      </div>
+      <div class="card">
+         <div class="item item-text-wrap">
+            <p class="card-title">简介</p>
+            <p class="card-content">主要从事主要主要从事主要主要从事主要主要从事主要主要从事主要主要从事主要</p>
+         </div>
+      </div>
+   </ion-content>
+   <ion-footer-bar ng-show="show" ng-click="publicMethod.judgeLogin('咨询功能');changeShow()">
+      <div class="row">
+         <div style="padding:2px 5px;" class="col-60">
+            <input placeholder="填写问题" style="width:100%;" ng-init="show=true" />
+         </div>
+         <button class="col-40 button button-positive">我要咨询</button>
+      </div>
+   </ion-footer-bar>
+   <ion-footer-bar ng-show="!show" style="height:200px;width:100%;">
+      <div style="width:100%;text-align:center;height:100%;position:relative;">
+         <div style="position:relative;height:38px;background:#FFF;padding-bottom:4px;">
+            <button style="position:absolute;top:0px;left:0px;" ng-click="show=true" class="button button-small">取消</button>
+            <span style="padding:5px;display:inline-block;">填写问题</span>
+            <button style="position:absolute;top:0px;right:0px;" ng-click="comment()" class="button button-small button-positive">发表</button>
+         </div>
+         <div>
+            <textarea placeholder="编辑问题" style="width:100%;height:114px;border:1px solid #CCC;" ng-model="message" ng-init="show=true" ng-focus="show=false">{{emailNotification}}</textarea>
+         </div>
+         <div style="height:45px;text-align:left;border-top:1px solid #ccc;">
+            <ion-toggle ng-model="infoPublic" ng-true-value="true" ng-false-value="false" style="height:100%;border:none;line-height:45px;" toggle-class="toggle-calm" class="col toggle-small">对所有人可见</ion-toggle>
+         </div>
+      </div>
+   </ion-footer-bar>
+</ion-nav-view>

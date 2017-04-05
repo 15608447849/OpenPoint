@@ -1,0 +1,116 @@
+<ion-nav-view name="resumePreview">
+   <ion-header-bar class="bar-calm">
+      <a href="#/resumeMarket" class="button button-clear icon ion-ios-arrow-back"></a>
+      <h1 style="text-align:center" class="title">简历预览</h1>
+      <a class="button button-clear icon ion-share"></a>
+   </ion-header-bar>
+   <ion-content style="padding:0 20px;">
+      <div class="card">
+         <div class="item item-text-wrap">
+            <div style="border-bottom:1px solid #ddd" class="row">
+               <h2>基本信息</h2>
+            </div>
+            <div class="row">
+               <span style="padding:8px;">姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名</span>
+               <span style="padding:8px;">小明</span>
+            </div>
+            <div class="row">
+               <span style="padding:8px;">性&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp别</span>
+               <span style="padding:8px;">男</span>
+            </div>
+            <div class="row">
+               <span style="padding:8px;">年龄</span>
+               <span style="padding:8px;">{{resumenDetail.jsbResume.age}}</span>
+            </div>
+            <div class="row">
+               <span style="padding:8px;">最高学历</span>
+               <span style="padding:8px;">本科</span>
+            </div>
+            <div class="row">
+               <span style="padding:8px;">联系电话</span>
+               <span style="padding:8px;">13885856969</span>
+            </div>
+            <div class="row">
+               <span style="padding:8px;">联系邮箱</span>
+               <span style="padding:8px;">5241654125@qq.com</span>
+            </div>
+         </div>
+      </div>
+      <div class="card">
+         <div class="item item-text-wrap">
+            <div style="border-bottom:1px solid #ddd;" class="row">
+               <h2 style="padding:5px 0px;">求职意向</h2>
+            </div>
+            <div class="row">
+               <span style="padding:8px;">期望工作</span>
+               <apan style="padding:8px;">{{resumenDetail.jsbResume.inposit}}</apan>
+            </div>
+            <div class="row">
+               <span style="padding:8px;">期望薪资</span>
+               <span style="padding:8px;">{{resumenDetail.jsbResume.salary}}</span>
+            </div>
+         </div>
+      </div>
+      <div class="card">
+         <div class="item item-text-wrap">
+            <div style="border-bottom:1px solid #ddd;" class="row">
+               <h2 style="padding:5px 0px;">工作经历</h2>
+            </div>
+            <div style="border-left:1px solid #ddd;margin-top:12px;position:relative;top:0px;left:0px;" ng-repeat="item in jobHistory">
+               <span style="display:inline-block;border:5px solid #11c1f3;border-radius:50%;position:absolute;top:-5px;left:-5px;"></span>
+               <div style="margin-bottom:8px;" class="row">{{item.begdate}}-{{item.endate}}</div>
+               <div style="margin-bottom:8px;" class="row">{{item.swsc}}</div>
+               <div class="row">{{item.perf}}</div>
+            </div>
+         </div>
+      </div>
+      <div class="card">
+         <div class="item item-text-wrap">
+            <div style="border-bottom:1px solid #ddd;" class="row">
+               <h2 style="padding:5px 0px;">毕业院校</h2>
+            </div>
+            <div style="border-left:1px solid #ddd;margin-top:12px;position:relative;top:0px;left:0px;" ng-repeat="item in school">
+               <span style="display:inline-block;border:5px solid #11c1f3;border-radius:50%;position:absolute;top:-5px;left:-5px;"></span>
+               <div style="margin-bottom:8px;" class="row">{{item.begdate}}-{{item.endate}}</div>
+               <div style="margin-bottom:8px;" class="row">{{item.swsc}}</div>
+               <div class="row">{{item.perf}}</div>
+            </div>
+         </div>
+      </div>
+      <div class="card">
+         <div class="item item-text-wrap">
+            <div style="border-bottom:1px solid #ddd;" class="row">
+               <h2 style="padding:5px 0px;">职业技能</h2>
+            </div>
+            <div class="row">
+               <span style="margin-top:8px;">{{resumenDetail.jsbResume.skills}}</span>
+            </div>
+         </div>
+      </div>
+      <div class="card">
+         <div class="item item-text-wrap">
+            <div style="border-bottom:1px solid #ddd;" class="row">
+               <h2 style="padding:5px 0px;">自我描述</h2>
+            </div>
+            <div class="row">
+               <span style="margin-top:8px;">{{resumenDetail.jsbResume.selfev}}</span>
+            </div>
+         </div>
+      </div>
+   </ion-content>
+   <ion-footer-bar ng-show="type==2 &amp;&amp; (msgEdit==false)" ng-init="msgEdit=false" class="qy-pd0">
+      <button ng-click="msgEdit=true" class="button button-positive button-full qy-mt0 qy-mb0">发送消息</button>
+   </ion-footer-bar>
+   <ion-footer-bar ng-show="msgEdit" style="height:200px;width:100%;">
+      <div style="width:100%;text-align:center;">
+         <div style="position:relative;height:34px;">
+            <button style="position:absolute;top:0px;left:0px;" ng-click="msgEdit=false" class="button button-small">取消</button>
+            <span style="padding:5px;display:inline-block;">编辑消息</span>
+            <button style="position:absolute;top:0px;right:0px;" ng-click="sendMsg()" class="button button-small button-positive">发送</button>
+         </div>
+         <div style="height:100%;">
+            <textarea placeholder="编辑留言" style="width:100%;height:100%;" ng-model="message" ng-init="show=true" ng-focus="show=false"></textarea>
+         </div>
+      </div>
+   </ion-footer-bar>
+</ion-nav-view>

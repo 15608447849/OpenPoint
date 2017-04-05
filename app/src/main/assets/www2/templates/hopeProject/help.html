@@ -1,0 +1,137 @@
+<ion-nav-view name="help">
+   <ion-header-bar class="bar-calm">
+      <a ng-if="helpType==2" ui-sref="seekHelp({oid:null})" class="button button-clear icon ion-ios-arrow-back"></a>
+      <a ng-if="helpType==1" href="#/tab/hopeProject" class="button button-clear icon ion-ios-arrow-back"></a>
+      <h1 style="text-align:center" class="title">详情</h1>
+      <a class="button button-clear icon ion-share"></a>
+   </ion-header-bar>
+   <ion-content style="padding:0 0;">
+      <div style="margin-left:0px;margin-right:0px;" class="list card">
+         <div style="border-bottom-color:transparent;" class="item item-avatar">
+            <img ng-src="{{helpList.img}}" />
+            <div class="row">
+               <h2 style="text-align:left;" class="col-50">{{helpList.name}}</h2>
+               <span style="text-align:right;" class="col-50">{{helpList.reldate}}</span>
+            </div>
+         </div>
+         <div style="border-color:transparent;" class="item item-body qy-pd0">
+            <div class="row qy-mb10">
+               <div class="col-25 qy-pl6">姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名：</div>
+               <div class="col-75">{{helpList.hppownerName || helpList.hppowner.toNumber()}}</div>
+            </div>
+            <div class="row qy-mb10">
+               <div class="col-25 qy-pl6">地&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp址：</div>
+               <div class="col-75">{{helpList.address}}</div>
+            </div>
+            <div class="row qy-mb10">
+               <div class="col-25 qy-pl6">联系电话：</div>
+               <div class="col-75">{{helpList.hpptitle}}</div>
+            </div>
+            <div class="row qy-mb10">
+               <div class="col-25 qy-pl6">求助事由：</div>
+               <div class="col-75">{{helpList.hpptitle}}</div>
+            </div>
+            <div class="row">
+               <div style="border-right:1px solid #ddd;" class="col-50 qy-text-center">
+                  <span>已有
+                     <span class="qy-color-blue">{{helpList.countHppoff}}</span>
+                  </span>人捐助</div>
+               <div class="col-50 qy-text-center">
+                  <span>已筹
+                     <span class="qy-color-blue">{{helpList.amount}}</span>
+                  </span>元</div>
+            </div>
+         </div>
+      </div>
+      <div style="margin-left:0px;margin-right:0px;" class="list card">
+         <div style="background:#fff;padding-left:6px;padding-right:0px;" class="item item-divider">详情</div>
+         <div style="padding-left:0px;padding-right:0px;" class="item item-text-wrap">
+            <!--p(style="text-indent:28px;padding:0 6px;") {{helpList.hppcon}}-->
+            <div content-format="content-format" contentformatsrc="{{helpList.hppcon}}"></div>
+         </div>
+         <!--.item.item-divider.qy-pd0(style="background:#fff;border-top-color:transparent")button.button.button-full.button-clear.button-small.qy-margin0.qy-color-blue 展开全文-->
+      </div>
+      <div style="margin-left:0px;margin-right:0px;" class="list card">
+         <div style="background:#fff;padding-left:0px;padding-right:0px;" class="item item-divider">证明资料</div>
+         <div style="padding-left:0px;padding-right:0px;padding-top:5px;" class="item item-text-wrap">
+            <div class="row">
+               <button style="border:1px solid green;color:green;" disabled="true" class="button button-small">身份证已审核</button>
+            </div>
+            <div style="margin-top:10px;" class="row">
+               <div class="col-25">
+                  <img src="img/adam.jpg" style="width:95%;" ng-click="showBigImg('img/adam.jpg')" />
+               </div>
+               <div class="col-25">
+                  <img src="img/adam.jpg" style="width:95%;" ng-click="showBigImg('img/adam.jpg')" />
+               </div>
+               <div class="col-25">
+                  <img src="img/adam.jpg" style="width:95%;" ng-click="showBigImg('img/adam.jpg')" />
+               </div>
+               <div class="col-25">
+                  <img src="img/adam.jpg" style="width:95%;" ng-click="showBigImg('img/adam.jpg')" />
+               </div>
+            </div>
+         </div>
+      </div>
+      <div style="margin-left:0px;margin-right:0px;" class="list card">
+         <div style="background:#fff;padding-left:0px;padding-right:0px;top:0px;margin-bottom:0px;margin-top:0px;" ng-init="isActive=true" class="item item-divider tabs tabs-striped tabs-top tabs-color-balanced card row"><a ng-class="{true:'active'}[isActive]" ng-click="isActive=true;seeDonation()" class="tab-item col-50">筹款动态</a><a ng-class="{false:'active'}[isActive]" ng-click="isActive=false;seeMessage()" class="tab-item col-50">爱心留言</a>
+         </div>
+         <div ng-if="isActive==true" ng-repeat="item in donationMes" class="item item-text-wrap list">
+            <div class="item item-avatar">
+               <img src="img/adam.jpg" />
+               <div class="row">
+                  <h2 style="text-align:left;" class="col-50">{{item.offeoName || item.offpeo.toNumber()}}</h2>
+                  <span style="text-align:right;" class="col-50">捐助了
+                     <span>{{item.amount/100 | number:2}}</span>
+                  </span>元</div>
+               <div class="row">
+                  <span>{{computingTime(item.offdate,item.offtime)}}</span>
+               </div>
+            </div>
+         </div>
+         <div ng-if="isActive==false" ng-repeat="item in fundraising" class="item item-text-wrap list">
+            <div class="item item-avatar">
+               <img src="img/adam.jpg" />
+               <div class="row">
+                  <h2 style="text-align:left;" class="col-50">{{item.relpeo.toNumber()}}</h2>
+                  <span style="text-align:right;" class="col-50">{{computingTime(item.reldate,item.reltime)}}</span>
+               </div>
+               <div class="row">
+                  <span>{{item.relcon}}</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </ion-content>
+   <ion-footer-bar ng-show="show&amp;&amp;helpType!=2">
+      <div class="row">
+         <div style="padding:2px 5px;" class="col-60">
+            <input placeholder="编辑留言" style="width:100%;" ng-init="show=true" ng-focus="show=false;judgeLogin()" />
+         </div>
+         <button ng-click="openHelp(helpList.hppid)" class="col-40 button button-positive">帮助Ta</button>
+      </div>
+   </ion-footer-bar>
+   <ion-footer-bar ng-show="!show" style="height:200px;width:100%;">
+      <div style="width:100%;text-align:center;">
+         <div style="position:relative;height:34px;">
+            <button style="position:absolute;top:0px;left:0px;" ng-click="show=true" class="button button-small">取消</button>
+            <span style="padding:5px;display:inline-block;">写评论</span>
+            <button style="position:absolute;top:0px;right:0px;" ng-click="comment()" class="button button-small button-positive">发表</button>
+         </div>
+         <div style="height:100%;">
+            <textarea placeholder="编辑留言" style="width:100%;height:100%;" ng-model="message" ng-init="show=true" ng-focus="show=false"></textarea>
+         </div>
+      </div>
+   </ion-footer-bar>
+</ion-nav-view>
+<script id="bigImg.html" type="text/ng-template">
+   <div id="bigImg" style="position:fixed;top:0;left:0;z-index:10;width:100%;height:100%;background:rgba(0,0,0,.5)" class="popover-backdrop"><img style="position:absolute;top:10%;left:50%;z-index:15;display:block;margin-top:18px;margin-left:-165px;height:420px;width:330px;box-shadow:0 1px 3px rgba(0,0,0,.4)" src="{{imgUrl}}" ng-click="hideImg()" class="img-responsive"/></div><!--<div id="rightDisplay" ng-if="bigImage" class="popover-backdrop"style="position: fixed;top: 0;left: 0;z-index: 10; width: 100%;height: 100%;"
+   ng-click="hideBigImage()"
+   on-swipe-left="swipeLeft()"
+   on-swipe-right="swipeRight()" >
+   <img class="img-responsive"
+   style="position: absolute;top: 10%;left: 50%;z-index: 10;display: block;margin-top: 18px;
+   margin-left: -165px;height: 420px;width: 330px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);"
+   src="{{Url}}" / >
+   </div>-->
+</script>

@@ -1,0 +1,75 @@
+<ion-nav-view name="jobDetails">
+   <ion-header-bar class="bar-calm">
+      <a href="#/tab/recruitMessing" ng-if="type==1" class="button button-clear icon ion-ios-arrow-back"></a>
+      <a href="#/apply" ng-if="type==2" class="button button-clear icon ion-ios-arrow-back"></a>
+      <h1 style="text-align:center" class="title">职位详情</h1>
+      <a class="button button-clear icon ion-share"></a>
+   </ion-header-bar>
+   <ion-content style="padding:0 20px;">
+      <div ng-repeat="item in recruitDetails">
+         <div class="card">
+            <div class="item item-text-wrap">
+               <div class="row">
+                  <h2 class="col-50">{{jobReturn(item.posit)}}</h2>
+                  <span class="col-50 qy-text-right">{{item.updt}}</span>
+               </div>
+               <div class="row">
+                  <p>{{item.username}}</p>
+               </div>
+               <div class="row">
+                  <span>{{item.workadd}}</span>
+               </div>
+               <div class="row">
+                  <div class="col-50">
+                     <span class="qy-color-blue">性质</span>
+                     <span>{{item.worknat}}</span>
+                  </div>
+                  <div class="col-50">
+                     <span class="qy-color-blue">城市</span>
+                     <span>{{item.workadd}}</span>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-50">
+                     <span class="qy-color-blue">学历</span>
+                     <span>{{item.edureq}}</span>
+                  </div>
+                  <div class="col-50">
+                     <span class="qy-color-blue">类别</span>
+                     <span>互联网111</span>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-50">
+                     <span class="qy-color-blue">月薪</span>
+                     <span>{{item.minsalary/1000}}K-{{item.maxsalary/1000}}K</span>
+                  </div>
+                  <div class="col-50">
+                     <span class="qy-color-blue">人数</span>
+                     <span>{{item.edureqid}}人</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card">
+            <div class="item item-text-wrap">
+               <h2 style="border-bottom:1px solid #ddd;padding:5px 0px;">薪酬福利</h2>
+               <span>{{item.salben}}</span>
+            </div>
+         </div>
+         <div class="card">
+            <div class="item item-text-wrap">
+               <h2 style="border-bottom:1px solid #ddd;padding:5px 0px;">职位描述</h2>
+               <h2 style="margin:12px 0px;">岗位职责：</h2>
+               <span>{{item.pdec}}</span>
+               <h2 style="margin:12px 0px;">职位要求：</h2>
+               <span>{{item.preq}}</span>
+            </div>
+         </div>
+      </div>
+   </ion-content>
+   <ion-footer-bar class="qy-pd0">
+      <button ng-click="applyJob()" ng-if="type==1" class="button button-positive button-full qy-mt0 qy-mb0">申请职位</button>
+      <button ng-if="type==2" disabled="disabled" class="button button-positive button-full qy-mt0 qy-mb0">申请职位</button><a ng-click="openApply()" ng-if="type==3" style="width:100%;padding-top:5px;" class="button button-positive button-full qy-mt0 qy-mb0">收到的申请</a>
+   </ion-footer-bar>
+</ion-nav-view>

@@ -1,0 +1,50 @@
+<ion-nav-view name="personalDetail">
+   <ion-header-bar class="bar-calm">
+      <a href="#/tab/dash" class="button button-clear icon ion-ios-arrow-back"></a>
+      <h1 class="title qy-text-center">个人设置</h1><a ng-click="submitSetUp()" class="button button-clear">保存</a>
+   </ion-header-bar>
+   <ion-content style="padding:0 20px;">
+      <div class="list">
+         <label style="border-left:none;border-right:none;" class="item item-input">
+            <span class="input-label">昵&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp称</span>
+            <input type="text" placeholder="请输入昵称" ng-model="personalDetail.nkname" class="qy-text-right" />
+         </label>
+         <label style="border-left:none;border-right:none;" class="item item-input">
+            <span class="input-label">姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名</span>
+            <input type="text" placeholder="请输入姓名" ng-model="personalDetail.name" class="qy-text-right" />
+         </label>
+         <label style="border-left:none;border-right:none;" class="item item-input item-select">
+            <span class="input-label">性&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp别</span>
+            <select type="text" ng-model="personalDetail.sex" ng-options="x.value as x.text for x in $root.sex" class="qy-text-right"></select>
+         </label>
+         <a style="padding:13px 13px 13px 16px;border-left:none;border-right:none;" ng-click="selectDate()" class="item row">
+            <span class="col-50">出身年月</span>
+            <span class="col-50 qy-text-right">{{personalDetail.age | date:'yyyy-MM-dd'}}<i style="margin-left:12px;" class="icon ion-chevron-right"></i>
+            </span>
+         </a>
+         <div style="border-left:none;border-right:none;padding:6px 12px 6px 14px;" class="item row">
+            <span style="padding:6px 0 6px 0;" class="col-20">地&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp址</span>
+            <div class="col-80 qy-text-right">
+               <hms-pct-select ng-transclude="ng-transclude" selected-address="personalDetail.selectedAddress"></hms-pct-select>
+            </div>
+         </div>
+         <label style="border-left:none;border-right:none;" class="item item-input">
+            <span class="input-label">身&nbsp&nbsp份&nbsp&nbsp证</span>
+            <input type="text" placeholder="请输入身份证号" ng-model="personalDetail.id" class="qy-text-right" />
+         </label>
+         <label style="border-left:none;border-right:none;" class="item item-input">
+            <span class="input-label">电&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp话</span>
+            <input type="text" ng-model="personalDetail.phone" placeholder="请输入电话号码" class="qy-text-right" />
+         </label>
+         <label style="border-left:none;border-right:none;" class="item item-input">
+            <span class="input-label">邮&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp箱</span>
+            <input type="text" ng-model="personalDetail.email" placeholder="请输入邮箱" class="qy-text-right" />
+         </label>
+         <a style="padding:12px;border-left:none;border-right:none;" ui-sref="modifyPwd" class="item row">
+            <span class="col-50">用户密码</span>
+            <span class="col-50 qy-text-right"><i style="margin-left:12px;" class="icon ion-chevron-right"></i>
+            </span>
+         </a>
+      </div>
+   </ion-content>
+</ion-nav-view>

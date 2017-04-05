@@ -1,0 +1,44 @@
+<!--Created by Administrator on 2017/3/22.-->
+<ion-nav-view>
+   <ion-header-bar class="bar-calm">
+      <a ng-click="go_back()" class="button button-clear icon ion-ios-arrow-back"></a>
+      <h1 style="text-align:center;" class="title">详情</h1>
+   </ion-header-bar>
+   <ion-content style="padding:0 10px;">
+      <div>
+         <div style="border-bottom:1px solid #ddd;margin-top:2px;" class="row">
+            <p style="margin:10px 0px;color:#212121;font-size:18px;">基本信息</p>
+         </div>
+         <div style="margin-top:10px;" class="row">
+            <img ng-src="../../img/adam.jpg" style="width:40px;height:40px;border-radius:50%;" />
+            <span style="padding-top:10px;margin-left:8px;color:#212121;font-size:18px;">{{userMessing.username}}</span>
+         </div>
+         <div style="color:#646464;line-height:2em;border-bottom:3px solid #ddd;">
+            <div class="row">
+               <span class="col-20">姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名</span>
+               <span style="color:#000;">{{userdetDetails.username}}</span>
+            </div>
+            <div class="row">
+               <span class="col-20">性&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp别</span>
+               <span style="color:#000;">{{userdetDetails.userpro}}</span>
+            </div>
+            <div class="row">
+               <span class="col-20">个人特长</span>
+               <span style="color:#000;">{{userdetDetails.usertel}}</span>
+            </div>
+         </div>
+      </div>
+      <div>
+         <div style="border-bottom:1px solid #ddd;" class="row">
+            <p style="margin:10px 0px;color:#212121;font-size:18px;">证件及资料</p>
+         </div>
+         <div class="row">
+            <textarea type="text" rows="10" cols="20" style="border:1px solid #ddd;width:100%;margin-top:10px;"></textarea>
+         </div>
+      </div>
+   </ion-content>
+   <ion-footer-bar style="padding:0px;height:36px;">
+      <button ng-click="successPop()" style="background-color:#ddd;margin-left:5%;" class="button button-positive col-40">拒绝</button>
+      <button ng-click="successPop()" style="background-color:#11c1f3;position:initial;margin-left:10%;" class="button button-positive col-40">同意</button>
+   </ion-footer-bar>
+</ion-nav-view>

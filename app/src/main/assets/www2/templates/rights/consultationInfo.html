@@ -1,0 +1,23 @@
+<!--Created by Administrator on 2017/3/7.
+-->
+<ion-nav-view>
+   <ion-header-bar class="bar-calm">
+      <a href="#/tab/expert" class="button button-clear icon ion-ios-arrow-back"></a><a style="line-height:42px;text-align:center" ng-click="showSubMenu()" class="title button button-clear">咨询信息<i class="icon ion-ios-arrow-down"></i></a><i class="button button-clear icon ion-android-search"></i>
+   </ion-header-bar>
+   <ion-content>
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+      <div ng-repeat="item in dataList" ng-click="openList(item.emaid)">
+         <div style="border-bottom-color:transparent;" class="item item-avatar">
+            <img ng-src="{{item.img}}" />
+            <h2 style="text-align:left;" class="row">
+               <span class="col-50">{{(item.userid).toNumber()}}</span>
+               <span style="text-align:right;" class="col-50 col-right">{{publicMethod.createTime(item.reldate,item.reltime)|timeFormat}}</span>
+            </h2>
+            <div class="row">
+               <h2 style="text-align:left;">{{item.ematitle}}</h2>
+            </div>
+         </div>
+      </div>
+      <ion-infinite-scroll ng-if="couldLoadMore" on-infinite="loadMore()" distance="10%" immediate-check="false"></ion-infinite-scroll>
+   </ion-content>
+</ion-nav-view>

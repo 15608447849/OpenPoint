@@ -1,0 +1,30 @@
+<!--Created by Administrator on 2017/3/20.-->
+<ion-nav-view>
+   <ion-header-bar class="bar-calm">
+      <a ng-click="go_back()" class="button button-clear icon ion-ios-arrow-back"></a>
+      <h1 style="text-align:center;" class="title">创建活动</h1><i ng-click="inform()" class="button button-clear">发布</i>
+   </ion-header-bar>
+   <ion-content style="padding:0 20px;">
+      <div style="border-color:transparent" class="list">
+         <label style="border-color:transparent;padding-left:0px;margin-top:10px;" class="item item-input item-stacked-label">
+            <span class="input-label"><i style="color:#11c1f3">*</i>
+               <span style="margin-left:5px;color:#646464">活动名称 ：</span>
+            </span>
+            <input type="text" placeholder="请输入活动名称" style="border:1px solid #ccc;padding:5px 12px;margin-top:5px;margin-top:10px;" ng-model="activity.title" />
+         </label>
+         <label style="border-color:transparent;padding-left:0px;" class="item item-input item-stacked-label">
+            <span class="input-label"><i style="color:#11c1f3">*</i>
+               <span style="margin-left:5px;color:#646464">招募人数 ：</span>
+            </span>
+            <input type="text" placeholder="请输入招募人数" style="border:1px solid #ccc;padding:5px 12px;margin-top:10px;" ng-model="activity.count" />
+         </label>
+         <label style="border-color:transparent;padding-left:0px;" class="item item-input item-stacked-label">
+            <span class="input-label"><i style="color:#11c1f3">*</i>
+               <span style="margin-left:5px;color:#646464">活动详情 ：</span>
+            </span>
+            <textarea type="text" placeholder="请填写活动时间、地点、内容等信息..." rows="5" cols="20" style="border:1px solid #ccc;padding:5px 12px;margin-top:10px;" ng-model="activity.content"></textarea>
+         </label>
+         <!--button.button.button-positive.button-full(ng-click="successPop()",style="background-color:#11c1f3;") 提交申请-->
+      </div>
+   </ion-content>
+</ion-nav-view>

@@ -1,0 +1,34 @@
+<ion-nav-view name="seekHelp">
+   <ion-header-bar ng-init="seekShow=true" class="bar-calm">
+      <a href="#/tab/hopeProject" class="button button-clear icon ion-ios-arrow-back"></a><a style="line-height:42px;text-align:center" ng-click="modal.show()" ng-if="seekShow" class="title">我的求助<i class="icon ion-ios-arrow-down"></i></a>
+      <label ng-if="!seekShow" class="item-input-wrapper"><i class="icon ion-ios-search placeholder-icon"></i>
+         <input type="text" placeholder="请输入需要搜索的标题" style="width:100%;" ng-model="crux.key" ng-change="doRefresh()" />
+      </label><i ng-show="!seekShow" ng-click="seekShow=!seekShow" class="button button-clear">取消</i><i ng-show="seekShow" ng-click="seekShow=!seekShow" class="button button-clear icon ion-android-search"></i>
+   </ion-header-bar>
+   <ion-content>
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+      <div ng-repeat="item in hopes" ng-click="openList(item)" class="list card">
+         <div style="border-bottom-color:transparent;" class="item item-avatar">
+            <img ng-src="{{item.img}}" />
+            <div class="row">
+               <div style="text-align:left;" class="col-50">
+                  <h2 style="display:inline-block;" title="item.hppownerName || item.hppowner.toNumber()" class="col-50">{{item.hppownerName || item.hppowner.toNumber()}}</h2>
+                  <span style="border:1px solid {{color(item.audstateid)}};color:{{color(item.audstateid)}};border-radius:5px;padding:2px;" class="col-50">{{item.audstate}}</span>
+               </div>
+               <span style="text-align:right;" class="col-50">{{item.reldate}}</span>
+            </div>
+         </div>
+         <div style="border-top-color:transparent;" class="item item-body qy-pt0">
+            <p class="qy-margin0">{{item.hpptitle}}</p>
+            <p class="row">
+               <span style="text-align:left" class="col-50">已有
+                  <span class="qy-color-blue">{{item.countHppoff}}</span>人捐助</span>
+               <span style="text-align:right" class="col-50">已筹
+                  <span class="qy-color-blue">{{item.amount}}</span>元</span>
+            </p>
+         </div>
+      </div>
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+   </ion-content>
+   <a style="position:absolute;bottom:0;right:0;display:flex;z-index:9;font-size:50px;" ng-click="openSeekHelpEdit()" class="icon ion-ios-plus"></a>
+</ion-nav-view>

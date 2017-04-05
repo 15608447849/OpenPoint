@@ -1,0 +1,47 @@
+<!--Created by Administrator on 2017/3/17.
+-->
+<ion-nav-view>
+   <ion-header-bar class="bar-calm">
+      <a ng-click="go_back()" class="button button-clear icon ion-ios-arrow-back"></a><a style="line-height:42px;text-align:center" ng-click="showSubMenu()" class="title button button-clear">志愿者管理<i class="icon ion-ios-arrow-down"></i></a><i class="button button-clear icon ion-android-search"></i>
+   </ion-header-bar>
+   <ion-content>
+      <div style="background:#fff;top:0px;border-right:0px;color:#212121;" ng-init="isActive=true" class="item item-divider tabs tabs-striped tabs-top tabs-color-calm row"><a ng-class="{true:'active'}[isActive]" ng-click="isActive=true;seeDonation()" style="color:#212121;" class="tab-item col-50">协会成员</a><a ng-class="{false:'active'}[isActive]" ng-click="isActive=false;seeMessage()" style="color:#212121;" class="tab-item col-50">志愿者审核</a>
+      </div>
+      <ion-list ng-if="isActive">
+         <ion-item ng-repeat="item in memberList" ng-click="openMemberDetail(item.userid)" ng-if="item.isShow">
+            <div style="display:-webkit-box;">
+               <img ng-src="{{item.imgurl}}" style="max-width:50px;max-height:50px;border-radius:50%;" />
+               <div style="width:100%;padding-left:6px;">
+                  <h2 style="text-align:left;" class="row">
+                     <span class="col-50">{{item.nikename}}</span>
+                     <!--span.col-30(style="margin-left:60px;color:#999;font-size:13px;") {{item.actsuptimes}}-->
+                  </h2>
+                  <div class="row">
+                     <span style="text-align:left;color:#999;font-size:13px;margin-top:3px;" class="col-25">市团委{{}}</span>
+                  </div>
+               </div>
+            </div>
+            <ion-option-button ng-click="deleteMember(item)" class="button-calm">删除</ion-option-button>
+         </ion-item>
+      </ion-list>
+      <ion-list ng-if="!isActive">
+         <ion-item ng-repeat="item in auditList" ng-click="memberAudit(item.userid)">
+            <div style="display:-webkit-box;">
+               <img ng-src="{{item.imgurl}}" style="max-width:50px;max-height:50px;border-radius:50%;" />
+               <div style="width:100%;padding-left:6px;display:-webkit-box;">
+                  <div style="width:80%;">
+                     <h2 style="text-align:left;" class="row">
+                        <span class="col-50">{{item.username}}</span>
+                     </h2>
+                     <div class="row">
+                        <span style="text-align:left;color:#999;font-size:13px;margin-top:3px;" class="col-25">{{publicMethod.createTime(dataDetail.audate,dataDetail.audtime)|timeFormat}}</span>
+                     </div>
+                  </div>
+                  <span style="min-height:22px;line-height:16px;min-width:46px;font-size:13px;background-color:#fff;color:#11c1f3;margin-top:15px;border-color:#11c1f3;" class="button button-small">{{item.auditState}}</span>
+               </div>
+            </div>
+            <ion-option-button ng-click="deleteMember(item)" class="button-calm">删除</ion-option-button>
+         </ion-item>
+      </ion-list>
+   </ion-content>
+</ion-nav-view>

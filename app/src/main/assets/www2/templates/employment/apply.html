@@ -1,0 +1,38 @@
+<ion-nav-view name="apply">
+   <ion-header-bar class="bar-calm">
+      <a href="#/tab/recruitMessing" class="button button-clear icon ion-ios-arrow-back"></a><a style="line-height:42px;text-align:center" ng-click="modal.show()" class="title button button-clear">申请记录<i class="icon ion-ios-arrow-down"></i></a>
+      <a class="button button-clear icon ion-search"></a>
+   </ion-header-bar>
+   <ion-content style="padding:0 8px;">
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+      <div style="background:#fff;padding-left:0px;padding-right:0px;top:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;box-shadow:none;border-left:none;border-right:none" ng-init="isActive=true" class="item item-divider tabs tabs-striped tabs-top tabs-color-balanced card row"><a ng-class="{true:'active'}[isActive]" ng-click="isActive=true;seeDonation()" class="tab-item col-50">未查看</a><a ng-class="{false:'active'}[isActive]" ng-click="isActive=false;seeMessage()" class="tab-item col-50">已被查看</a>
+      </div>
+      <ul ng-show="isActive==true" style="border-left:none;border-right:none;border-bottom:none;" class="item item-text-wrap list">
+         <li ng-repeat="item in noSeeRecruit" ui-sref="jobDetails({oid:item.jsbRec.oid,type:2})" style="border-bottom:1px solid #ddd;" ng-click="goList(item)">
+            <div class="row">
+               <h2 style="text-align:left;" class="col-50">{{jobReturn(item.jsbRec.posit)}}</h2>
+               <span style="text-align:right;" class="col-50 qy-color-blue">{{item.jsbRec.minsalary/1000}}K-{{item.jsbRec.maxsalary/1000}}K</span>
+            </div>
+            <div class="row">
+               <span class="col-50">{{item.corporateName}}公司名称</span>
+               <span class="col-50 qy-text-right">{{item.jsbRec.updt}}</span>
+            </div>
+         </li>
+      </ul>
+      <ul ng-show="isActive==false" style="border-left:none;border-right:none;border-bottom:none;" class="item item-text-wrap list">
+         <li ng-repeat="item in seeRecruit" ui-sref="jobDetails({oid:item.jsbRec.oid,type:2})" style="border-bottom:1px solid #ddd;">
+            <div class="row">
+               <h2 style="text-align:left;" class="col-50">{{item.jsbRec.posit}}
+                  <span style="display:inline-block;background:#ffa423;color:#fff;">新消息</span>
+               </h2>
+               <span style="text-align:right;" class="col-50 qy-color-blue">{{item.jsbRec.minsalary/1000}}K-{{item.jsbRec.maxsalary/1000}}K</span>
+            </div>
+            <div class="row">
+               <span class="col-50">{{item.corporateName}}公司名称</span>
+               <span class="col-50 qy-text-right">{{item.jsbRec.updt}}</span>
+            </div>
+         </li>
+      </ul>
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+   </ion-content>
+</ion-nav-view>

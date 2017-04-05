@@ -1,0 +1,57 @@
+<!--Created by Administrator on 2017/3/21.
+-->
+<ion-nav-view>
+   <ion-header-bar class="bar-calm">
+      <a ng-click="go_back()" class="button button-clear icon ion-ios-arrow-back"></a>
+      <h1 style="text-align:center;" class="title">详情</h1>
+   </ion-header-bar>
+   <ion-content style="padding:0 10px;">
+      <div>
+         <div style="border-bottom:1px solid #ddd;margin-top:2px;" class="row">
+            <p style="margin:10px 0px;color:#212121;font-size:18px;">基本信息</p>
+         </div>
+         <div style="margin-top:10px;" class="row">
+            <img ng-src="{{}}" style="width:40px;height:40px;border-radius:50%;" />
+            <span style="padding-top:10px;margin-left:8px;color:#212121;font-size:18px;">{{userMessing.username}}</span>
+         </div>
+         <div style="color:#646464;line-height:2em;border-bottom:3px solid #ddd;">
+            <div class="row">
+               <span class="col-20">姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名</span>
+               <span style="color:#000;">{{userdetDetails.username}}</span>
+            </div>
+            <div class="row">
+               <span class="col-20">性&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp别</span>
+               <span style="color:#000;">{{userdetDetails.userpro}}</span>
+            </div>
+            <div class="row">
+               <span class="col-20">联系方式</span>
+               <span style="color:#000;">{{userdetDetails.usertel}}</span>
+            </div>
+            <div style="display:inline-block;" class="row">
+               <span class="col-20">所属机构</span>
+               <span style="color:#000;padding:0px 10px;" ng-repeat="item in arr">{{item.assname}}</span>
+            </div>
+            <div class="row">
+               <span class="col-20">个人特长</span>
+               <span style="color:#000;">{{userdetDetails.userstp}}</span>
+            </div>
+         </div>
+      </div>
+      <div>
+         <div class="row">
+            <p style="margin:10px 0px;color:#212121;font-size:18px;">参与的活动</p>
+         </div>
+         <div ng-repeat="item in dataList" ng-click="openList(item.assnoid)">
+            <div style="border-bottom-color:transparent;border-left-color:transparent;border-right-color:transparent;padding-left:125px;min-height:100px;padding-bottom:10px;" class="item item-avatar">
+               <img ng-src="{{item.imgurl}}" style="max-width:100px;max-height:80px;border-radius:initial;" />
+               <h2 style="text-align:left;" class="row">
+                  <span class="col-50">{{item.actitle}}</span>
+               </h2>
+               <div style="margin-top:25px;" class="row">
+                  <span style="text-align:left;color:#999;font-size:13px;" class="col-25">{{publicMethod.createTime(dataDetail.audate,dataDetail.audtime)|timeFormat}}</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </ion-content>
+</ion-nav-view>

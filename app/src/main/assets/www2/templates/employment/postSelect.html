@@ -1,0 +1,29 @@
+<ion-nav-view name="postSelect">
+   <ion-header-bar class="bar-calm item-input-inset">
+      <a href="#/jobIntention" class="button button-clear icon ion-ios-arrow-back"></a>
+      <label class="item-input-wrapper"><i class="icon ion-ios-search placeholder-icon"></i>
+         <input type="text" placeholder="职位名称" style="width:100%;" ng-model="jobPost.keyWord" ng-blur="filterShow=false" ng-init="filterShow=false" ng-focus="filterShow=true" ng-change="search()" />
+      </label><a ng-click="transferPosition()" class="button button-clear">确定</a>
+   </ion-header-bar>
+   <div ng-show="headerShow|| $root.resumeDetails.position" ng-init="headerShow=true" class="bar bar-subheader">
+      <span>您选择的职位为：</span>
+      <span style="font-size:16px;" class="qy-color-blue">{{jobReturn(jobPost.position) || jobReturn($root.recruitMsg.position)}}</span><a style="position:absolute;right:0px;" ng-click="headerShow=false" class="button button-clear qy-color-blue">收起</a>
+   </div>
+   <ion-content style="padding:0 10px;">
+      <div ng-if="filterShow" class="card">
+         <ion-list ng-repeat="item in filterPositionList">
+            <ion-radio ng-model="jobPost.position" ng-value="item.occid" style="border-top:1px solid #ccc;">{{item.occname}}</ion-radio>
+         </ion-list>
+      </div>
+      <div ng-repeat="item in $root.post" ng-if="!filterShow" class="card">
+         <div class="item item-divider qy-color-blue">{{item.occname}}</div>
+         <div ng-repeat="x in item.child" ng-init="x.showChild=false" class="item qy-pd0"><a ng-click="x.showChild=!x.showChild" class="button button-full qy-margin0 qy-pd0 qy-text-left">{{x.occname}}<i style="position:absolute;right:5px;" class="icon ion-chevron-down"></i></a>
+            <div ng-show="x.showChild" class="item qy-pd0">
+               <ion-list ng-repeat="y in x.grandson">
+                  <ion-radio ng-model="jobPost.position" ng-value="y.occid" style="border-top:1px solid #ccc;">{{y.occname}}</ion-radio>
+               </ion-list>
+            </div>
+         </div>
+      </div>
+   </ion-content>
+</ion-nav-view>

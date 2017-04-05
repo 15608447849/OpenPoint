@@ -1,0 +1,27 @@
+<ion-nav-view name="donation">
+   <ion-header-bar ng-init="donationShow=true" class="bar-calm">
+      <a href="#/tab/hopeProject" class="button button-clear icon ion-ios-arrow-back"></a><a style="line-height:42px;text-align:center" ng-click="modal.show()" ng-if="donationShow" class="title">我的捐助<i class="icon ion-ios-arrow-down"></i></a>
+      <label ng-if="!donationShow" class="item-input-wrapper"><i class="icon ion-ios-search placeholder-icon"></i>
+         <input type="text" placeholder="请输入需要搜索的标题" style="width:100%;" ng-model="crux.key" ng-change="querySeek()" />
+      </label><i ng-show="!donationShow" ng-click="donationShow=!donationShow" class="button button-clear">取消</i><i ng-show="donationShow" ng-click="donationShow=!donationShow" class="button button-clear icon ion-android-search"></i>
+   </ion-header-bar>
+   <ion-content>
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+      <div style="padding:10px 15px;" class="list card">
+         <h2 class="qy-mb0">您的捐款总额为
+            <span class="qy-color-blue">{{total/100 | number:2}}</span>元</h2>
+      </div>
+      <div ng-repeat="item in donationList" class="list card">
+         <div style="border-bottom-color:transparent;" class="item item-avatar">
+            <img ng-src="{{item.img}}" />
+            <div class="row">
+               <h2 style="text-align:left;" class="col-50">{{item.hppInfo.hpptitle}}</h2>
+               <span style="text-align:right;" class="col-50">捐助了
+                  <span class="qy-color-blue">{{item.amount/100 | number:2}}</span>元</span>
+            </div>
+            <div class="row">{{item.time}}</div>
+         </div>
+      </div>
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+   </ion-content>
+</ion-nav-view>

@@ -1,0 +1,16 @@
+<!--Created by Administrator on 2017/3/28.-->
+<ion-nav-view>
+   <ion-header-bar class="bar-calm">
+      <a ng-click="go_back()" class="button button-clear icon ion-ios-arrow-back"></a><a style="line-height:42px;text-align:center" ng-click="showSubMenu()" class="title button button-clear">选择协会<i class="icon ion-ios-arrow-down"></i></a><i class="button button-clear icon ion-android-search"></i>
+   </ion-header-bar>
+   <ion-content>
+      <div ng-repeat="item in arr" ng-click="openList(item.oid)">
+         <div style="text-align:center;" class="item"></div>
+      </div>
+      <ion-list ng-repeat="item in assnList" ng-click="openList(item.oid)">
+         <ion-radio ng-model="choice" ng-value="item.oid">
+            <span>{{item.assname}}</span>
+         </ion-radio>
+      </ion-list>
+   </ion-content>
+</ion-nav-view>

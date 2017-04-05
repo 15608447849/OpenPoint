@@ -1,0 +1,50 @@
+<ion-nav-view name="seekHelpEdit">
+   <ion-header-bar class="bar-calm">
+      <a ui-sref="seekHelp({oid:null})" class="button button-clear icon ion-ios-arrow-back"></a>
+      <h1 style="text-align:center;" class="title">编辑求助</h1>
+   </ion-header-bar>
+   <ion-content style="padding:0 20px;">
+      <div style="border-color:transparent" class="list">
+         <!--label.item.item-input.item-stacked-label(style="border-color:transparent;padding-left:0px;")span.input-label
+    i(style="color:#11c1f3") *
+    |姓名：
+input(type="text",placeholder="请输入姓名",style="border:1px solid #ddd;padding:5px 12px;",ng-model="help.userName")-->
+         <!--ionic-city-picker(options='cityPickData')-->
+         <!--.row(style="padding:12px;border-left:none;border-right:none;")span.col-50 请选择地址
+hms-pct-select(ng-transclude selected-address="help.selectedAddress")-->
+         <!--.item(style="padding:0px;border:none;")span.row
+    i(style="color:#11c1f3") *
+    | 请选择地址：
+.row(style="border:1px solid #ccc;padding:0px 0px 0px 6px;")
+    hms-pct-select(ng-transclude selected-address="help.selectedAddress")-->
+         <!--label.item.item-input.item-stacked-label(style="border-color:transparent;padding-left:0px;")span.input-label
+    i(style="color:#11c1f3") *
+    | 联系电话：
+//input(type="text",placeholder="请输入电话",style="border:1px solid #ddd;padding:5px 12px;",ng-model="help.phone",required,ng-pattern="/^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/")
+input(type="text",placeholder="请输入电话",style="border:1px solid #ddd;padding:5px 12px;",ng-model="help.phone",ng-blur="phoneRquired()")-->
+         <!--label.item.item-input.item-stacked-label(style="border-color:transparent;padding-left:0px;")span.input-label
+    i(style="color:#11c1f3") *
+    | 身份证号：
+//input(type="text",placeholder="请输入身份证号",style="border:1px solid #ddd;padding:5px 12px;",ng-model="help.docid",required,ng-pattern="/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/")
+input(type="text",placeholder="请输入身份证号",style="border:1px solid #ddd;padding:5px 12px;",ng-model="help.docid",ng-blur="idRquired()")-->
+         <label style="border-color:transparent;padding-left:0px;" class="item item-input item-stacked-label">
+            <span class="input-label"><i style="color:#11c1f3">*</i>求助事由：</span>
+            <input type="text" placeholder="请简短描述求助事由（30字以内）" style="border:1px solid #ddd;padding:5px 12px;" ng-model="help.hpptitle" />
+         </label>
+         <label style="border-color:transparent;padding-left:0px;" class="item item-input item-stacked-label">
+            <span class="input-label"><i style="color:#11c1f3">*</i>详情描述：</span>
+            <textarea type="text" placeholder="请填写详细的求助事由......." rows="5" cols="20" style="border:1px solid #ddd;padding:5px 12px;" ng-model="help.hppcon"></textarea>
+         </label>
+         <label style="border-color:transparent;padding-left:0px;" class="item item-input item-stacked-label">
+            <span class="input-label"><i style="color:#11c1f3">*</i>请上传身份证及证明资料：</span>
+            <!--textarea(type="text",placeholder="请填写详细的求助事由.......",rows="5",cols="20",style="border:1px solid #ddd;padding:5px 12px;",ng-model="help.details")-->
+         </label>
+      </div>
+   </ion-content>
+   <ion-footer-bar style="padding:0px;">
+      <button ng-click="successPop()" class="button button-positive button-full qy-mb0 qy-mt0">提交申请</button>
+   </ion-footer-bar>
+</ion-nav-view>
+<script type="text/ng-template" id="selectAdress.html">
+   <div class="modal"><ion-header-bar><h1>请选择地址</h1></ion-header-bar><ion-content><ul><li>{{$$user.$$city.orgname || 庆阳市}}</li><li><select placeholder="区/县" ng-model="help.county" ng-options="org.orgid as org.orgname for org in orgsCounty" ng-change="help.township = null;changeOrgs(help.county)"><option value="">区/县</option></select></li><li><select placeholder="乡/镇" ng-model="help.township" ng-options="orgt.orgid as orgt.orgname for orgt in orgsTownship" ng-change=""><option value="">乡/镇</option></select></li></ul></ion-content><ion-footer-bar><button class="button button-clear">确定</button></ion-footer-bar></div>
+</script>

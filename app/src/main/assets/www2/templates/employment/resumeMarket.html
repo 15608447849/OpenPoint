@@ -1,0 +1,29 @@
+<ion-nav-view name="resumeMarket">
+   <ion-header-bar ng-init="recruitShow=true" class="bar-calm">
+      <a href="#/tab/recruitMessing" class="button button-clear icon ion-ios-arrow-back"></a><a style="line-height:42px;text-align:center" ng-click="modal.show()" ng-if="recruitShow" class="title button button-clear">简历信息<i class="icon ion-ios-arrow-down"></i></a>
+      <label ng-if="!recruitShow" class="item-input-wrapper"><i class="icon ion-ios-search placeholder-icon"></i>
+         <input type="text" placeholder="请输入需要搜索的职位" style="width:100%;" ng-model="crux.key" ng-change="getData()" />
+      </label><i ng-show="!recruitShow" ng-click="recruitShow=!recruitShow;" class="button button-clear">取消</i><i ng-show="recruitShow" ng-click="recruitShow=!recruitShow" class="button button-clear icon ion-android-search"></i>
+   </ion-header-bar>
+   <ion-content style="padding:0 20px;">
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+      <ul style="padding:10px;" class="list">
+         <li ng-repeat="item in recruitList" style="border-bottom:1px solid #ddd;" ng-click="openResumePreview(item)" class="list qy-mb0">
+            <div class="row">
+               <div class="col-50">
+                  <span>{{item.jobTitle}}简历名称</span>
+               </div>
+               <div class="col-50 qy-text-right">
+                  <span>{{item.updt}}</span>
+               </div>
+            </div>
+            <div class="row">
+               <span>{{item.name}}&nbsp&nbsp求职人姓名</span>
+               <span style="border-right:1px solid #ddd;padding:0 8px;">{{jobReturn(item.inposit)}}</span>
+               <span style="padding:0 8px;">{{item.diploma}}</span>
+            </div>
+         </li>
+      </ul>
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+   </ion-content>
+</ion-nav-view>

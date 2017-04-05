@@ -1,0 +1,21 @@
+<!--Created by Administrator on 2017/3/17.-->
+<ion-nav-view name="volunteer">
+   <ion-header-bar class="bar-calm"><i menu-toggle="left" class="button button-clear icon ion-navicon"></i><a style="line-height:42px;text-align:center" ng-click="showSubMenu()" class="title button button-clear">活动消息<i class="icon ion-ios-arrow-down"></i></a><i class="button button-clear icon ion-android-search"></i>
+   </ion-header-bar>
+   <ion-content>
+      <div ng-repeat="item in dataList" ng-click="openList(item.assnoid)">
+         <div style="border-bottom-color:transparent;padding-left:125px;min-height:100px;padding-bottom:10px;" class="item item-avatar">
+            <img ng-src="{{item.imgurl}}" style="max-width:100px;max-height:80px;border-radius:initial;" />
+            <h2 style="text-align:left;" class="row">
+               <span class="col-50">{{item.actitle}}</span>
+            </h2>
+            <div style="margin-top:25px;" class="row">
+               <span style="text-align:left;color:#999;font-size:13px;" class="col-33">{{publicMethod.createTime(item.audate,item.audtime)|timeFormat}}</span>
+               <span style="min-height:21px;line-height:20px;min-width:56px;font-size:13px;background-color:#11c1f3;color:#fff;margin-left:100px;border-radius:4px;text-align:center;"
+               class="col-20">直播</span>
+               <!--span.col-20(style="min-height:22px;line-height:20px;min-width:56px;font-size:13px;background-color:#999;color:#fff;margin-left:120px;border-radius:4px;text-align:center;") 直播回顾-->
+            </div>
+         </div>
+      </div>
+   </ion-content>
+</ion-nav-view>

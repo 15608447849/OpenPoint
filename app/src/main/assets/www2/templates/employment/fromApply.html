@@ -1,0 +1,36 @@
+<ion-nav-view name="fromApply">
+   <ion-header-bar class="bar-calm">
+      <a href="#/tab/recruitMessing" class="button button-clear icon ion-ios-arrow-back"></a><a style="line-height:42px;text-align:center" class="title button button-clear">收到的申请</a>
+      <a class="button button-clear icon ion-search"></a>
+   </ion-header-bar>
+   <ion-content style="padding:0 8px;">
+      <div style="background:#fff;padding-left:0px;padding-right:0px;top:0px;margin-bottom:0px;margin-top:0px;margin-left:0px;box-shadow:none;border-left:none;border-right:none" ng-init="isActive=true" class="item item-divider tabs tabs-striped tabs-top tabs-color-balanced card row"><a ng-class="{true:'active'}[isActive]" ng-click="isActive=true;seeDonation()" class="tab-item col-50">未查看</a><a ng-class="{false:'active'}[isActive]" ng-click="isActive=false;seeMessage()" class="tab-item col-50">已被查看</a>
+      </div>
+      <ul ng-show="isActive==true" style="border-left:none;border-right:none;border-bottom:none;" class="item item-text-wrap list">
+         <li ng-repeat="item in noSeeRecruit" ui-sref="resumePreview({userid:item.jsbSjob.userid.toNumber(),type:2,jsbSjob:item.jsbSjob.oid})" style="border-bottom:1px solid #ddd;">
+            <div class="row">
+               <h2 style="text-align:left;" class="col-50">{{item.userdet.username}}的简历</h2>
+               <span style="text-align:right;color:#ccc;" class="col-50">{{item.jsbSjob.sendate}}</span>
+            </div>
+            <div class="row">
+               <span style="color:#ccc;padding:0 5px;">{{item.userdet.username}}</span>
+               <span style="display:inline-block;padding:0px 5px;border-right:1px solid #ccc;color:#ccc">{{item.userdet.usertitle}}1111111111</span>
+               <span style="color:#ccc;padding:0 5px;">{{item.userdet.useredu}}11111111111</span>
+            </div>
+         </li>
+      </ul>
+      <ul ng-show="isActive==false" style="border-left:none;border-right:none;border-bottom:none;" class="item item-text-wrap list">
+         <li ng-repeat="item in seeRecruit" ui-sref="resumePreview({userid:item.jsbSjob.userid.toNumber(),type:2,jsbSjob:item.jsbSjob.oid})" style="border-bottom:1px solid #ddd;">
+            <div class="row">
+               <h2 style="text-align:left;" class="col-50">{{item.userdet.username}}的简历</h2>
+               <span style="text-align:right;color:#ccc;" class="col-50">{{item.jsbSjob.sendate}}</span>
+            </div>
+            <div class="row">
+               <span style="color:#ccc;padding:0 5px;">{{item.userdet.username}}</span>
+               <span style="display:inline-block;padding:0px 5px;border-right:1px solid #ccc;color:#ccc">{{item.userdet.usertitle}}</span>
+               <span style="color:#ccc;padding:0 5px;">{{item.userdet.useredu}}</span>
+            </div>
+         </li>
+      </ul>
+   </ion-content>
+</ion-nav-view>

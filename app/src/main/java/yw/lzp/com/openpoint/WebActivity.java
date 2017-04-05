@@ -6,14 +6,15 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
-import static android.R.attr.type;
 
 public class WebActivity extends AppCompatActivity {
 
@@ -30,6 +31,8 @@ public class WebActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN,WindowManager.LayoutParams. FLAG_FULLSCREEN);
         setContentView(R.layout.activity_web);
         viewGroup = (ViewGroup) findViewById(R.id.web_framelayout);
         editText = (EditText) findViewById(R.id.web_edittext);
@@ -43,11 +46,40 @@ public class WebActivity extends AppCompatActivity {
             webView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT));
             viewGroup.addView(webView);
             //设置js交互
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+
+            WebSettings webSettings = webView.getSettings();
+            webSettings.setJavaScriptEnabled(true);//js
+            webSettings.setAllowFileAccess(true); //设置可以访问文件
+            webSettings.setAllowFileAccessFromFileURLs(true);// js读取本地文件内容
+            webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
+
+            webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);  //提高渲染的优先级
+
+            webSettings.setDefaultTextEncodingName("UTF-8");//设置编码格式
+            webSettings.setSupportZoom(false); //支持缩放，默认为true
+            webSettings.setBuiltInZoomControls(false); //设置内置的缩放控件。若为false，则该WebView不可缩放
+            webSettings.setDisplayZoomControls(true); //隐藏原生的缩放控件
+
+            //设置自适应屏幕，两者合用
+            webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
+            webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+
+            webSettings.setAppCacheEnabled(true); //启用应用缓存
+            webSettings.setDomStorageEnabled(true); //启用或禁用DOM缓存。
+            webSettings.setDatabaseEnabled(true); //启用或禁用DOM缓存。
+            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
+            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); //支持内容重新布局
+            webSettings.supportMultipleWindows();  //多窗口
+            webSettings.setPluginState(WebSettings.PluginState.ON);//flash 有关系
+            //webView.setWebChromeClient(new WebChromeClient());
+            webView.setWebViewClient(new WebViewClient());
+
             webView.addJavascriptInterface(new JavaActionJsInterface(), "android");
-            webView.loadUrl("file:///android_asset/index.html");
+            //webView.loadUrl("file:///android_asset/index.html");
 //            webView.loadUrl("http://172.16.0.51:8080?123");
+//            webView.loadUrl("file:///android_asset/www/index.html");
+            webView.loadUrl("file:///android_asset/www2/index.html");
 
         }
     }

@@ -1,0 +1,30 @@
+<!--Created by Administrator on 2017/3/6.
+-->
+<ion-nav-view name="rights">
+   <!--ion-header-bar.bar-calm-->
+   <!--   a.button.button-clear.icon.ion-ios-arrow-back(href="#/tab/expertsList")-->
+   <!--   a.title.button.button-clear(style="line-height:42px;text-align:center",ng-click="showSubMenu()") 专家信息-->
+   <!--      i.icon.ion-ios-arrow-down-->
+   <!--   i.button.button-clear.icon.ion-android-search-->
+   <ion-header-bar class="bar-calm"><i menu-toggle="left" class="button button-clear icon ion-navicon"></i><a style="line-height:42px;text-align:center" ng-click="showSubMenu()" class="title button button-clear">专家信息<i class="icon ion-ios-arrow-down"></i></a><i class="button button-clear icon ion-android-search"></i>
+   </ion-header-bar>
+   <ion-content>
+      <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" refreshing-icon="ion-loading-c" on-refresh="doRefresh()"></ion-refresher>
+      <div ng-repeat="item in dataList" ng-click="openList(item.userid)">
+         <div style="border-bottom-color:transparent;" class="item item-avatar">
+            <img ng-src="{{item.img}}" />
+            <h2 style="text-align:left;" class="row">
+               <span class="col-50">{{item.username}}</span>
+               <span style="text-align:right;" class="col-50 col-right"><i class="icon ion-ios-heart-outline calm"></i>
+                  <em>{{item.ppn}}</em>
+               </span>
+            </h2>
+            <div class="row">
+               <h2 style="text-align:left;">{{item.eaname}}</h2>
+            </div>
+         </div>
+      </div>
+      <ion-infinite-scroll ng-if="couldLoadMore" on-infinite="loadMore()" distance="10%" immediate-check="false"></ion-infinite-scroll>
+   </ion-content>
+   <!--a.icon.ion-ios-plus(style="position:absolute;bottom:0;right:0;display:flex;z-index:9;font-size:50px;",ng-click="openSeekHelpEdit()")-->
+</ion-nav-view>
