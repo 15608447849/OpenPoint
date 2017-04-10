@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private View image_layer;
     private ImageView image_show;
     private Handler handler;
-    private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +74,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        ip.setText("IP : ["+ (AppUtils.getLocalIpAddress().equals("")?"127.0.0.1": AppUtils.getLocalIpAddress())+"]");
-        mac.setText("MAC : ["+(AppUtils.getLocalMacAddressFromBusybox().equals("")?"00-00-00-00-00": AppUtils.getLocalMacAddressFromBusybox())+"]");
-        time.setText(sdf.format(new Date()));
+
+            ip.setText("IP Address: ["+ (AppUtils.getLocalIpAddress().equals("")?"127.0.0.1": AppUtils.getLocalIpAddress())+"]");
+            mac.setText("MAC : ["+(AppUtils.getLocalMac(this).equals("")?"00-00-00-00-00": AppUtils.getLocalMac(this))+"]");
+            time.setText(sdf.format(new Date()));
     }
 
     /**
@@ -88,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
         BackRunner.runBackground(new Runnable() {
             @Override
             public void run() {
+                if (!ShellUtils.checkRootPermission()){
+                    addMessageToText("没有root权限,无法执行命令");
+                    return;
+                }
                 final String command = AppUtils.openPointCmd(pointStr);
                 addMessageToText("准备执行端口打开:\n"+command);
                 ShellUtils.CommandResult result = ShellUtils.execCommand(command,true,true);
@@ -202,11 +207,15 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0;i<arr.length;i++){
                 poweroff[i] = Integer.parseInt(arr[i]);
             }
-            Intent intent = new Intent("android.q-zheng.action.PWR_DAILY");
+            addMessageToText("开机时间:"+ poweron[0]+":"+poweron[1]);
+            addMessageToText("关机时间:"+ poweroff[0]+":"+poweroff[1]);
+
+            Intent intent = new Intent("android.q-zheng.action.PWR_DAILY");//"
             intent.putExtra("timeon", poweron);
             intent.putExtra("timeoff", poweroff);
             intent.putExtra("enable",true); //使能开关机功能，设为 false,则为关闭,缺省为 true
             sendBroadcast(intent);
+
         }
         if (strarr[1].equals("c")){
             String arr[] = strarr[2].split("\\.");
@@ -233,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("enable",true); //使能开关机功能，设为 false,则为关闭,缺省为 true
             sendBroadcast(intent);
         }
-        Log.e(TAG,"设置定时开关机完毕");
+        addMessageToText("设置定时开关机完毕");
     }
 
     public void gotoWebView(View view){

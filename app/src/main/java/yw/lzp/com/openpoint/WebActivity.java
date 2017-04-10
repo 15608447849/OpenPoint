@@ -1,6 +1,7 @@
 package yw.lzp.com.openpoint;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +11,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class WebActivity extends AppCompatActivity {
 
@@ -23,7 +26,7 @@ public class WebActivity extends AppCompatActivity {
     private ViewGroup viewGroup;
     private TextView webInfo;
     private EditText editText;
-    private WebView webView;
+    private IWebview webView;
     private WebChromeClient chrom;
     private WebViewClient client;
     private Handler handler = new Handler();
@@ -42,7 +45,9 @@ public class WebActivity extends AppCompatActivity {
 
     private void createWebView() {
         if (webView == null) {
-            webView = new WebView(this);
+            webView = new IWebview(this);
+//            webView.enablecrossdomain();
+//            webView.enablecrossdomain41();
             webView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT));
             viewGroup.addView(webView);
             //设置js交互
@@ -51,7 +56,26 @@ public class WebActivity extends AppCompatActivity {
             webSettings.setJavaScriptEnabled(true);//js
             webSettings.setAllowFileAccess(true); //设置可以访问文件
             webSettings.setAllowFileAccessFromFileURLs(true);// js读取本地文件内容
+
             webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
+                webSettings.setAllowUniversalAccessFromFileURLs(true);//关于跨域
+            }else{
+                try {
+                    Class<?> clazz = webView.getSettings().getClass();
+                    Method method = clazz.getMethod("setAllowUniversalAccessFromFileURLs", boolean.class);
+                    if (method != null) {
+                        method.invoke(webView.getSettings(), true);
+                    }
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
 
             webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);  //提高渲染的优先级
 
@@ -76,10 +100,8 @@ public class WebActivity extends AppCompatActivity {
             webView.setWebViewClient(new WebViewClient());
 
             webView.addJavascriptInterface(new JavaActionJsInterface(), "android");
-            //webView.loadUrl("file:///android_asset/index.html");
-//            webView.loadUrl("http://172.16.0.51:8080?123");
-//            webView.loadUrl("file:///android_asset/www/index.html");
-            webView.loadUrl("file:///android_asset/www2/index.html");
+            webView.loadUrl("file:///android_asset/index.html");
+
 
         }
     }
